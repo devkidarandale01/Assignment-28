@@ -4,6 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Tic Tac Toe </title>
+   <style>
+  * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e3f2fd;
+  }
+
+  .app {
+    background: #0b1c3d;
+    width: 90%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 25px 45px rgba(13, 71, 161, 0.35);
+    text-align: center;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: #90caf9;
+  }
+
+
+  .setup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  input {
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: #bbdefb;
+    color:black;
+  }
+
+  input::placeholder {
+    color: black;
+  }
+
+  button {
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    background: #1976d2;
+    color: black;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #0d47a1;
+  }
+
+
+  .game {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .status {
+    font-weight: bold;
+    color: #bbdefb;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .cell {
+    height: 90px;
+    background: #102a56;
+    border-radius: 18px;
+    font-size: 36px;
+    color: #90caf9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .cell:hover {
+    background: #1c3d7a;
+  }
+</style>
 </head>
 <body>
    <div class="app">
