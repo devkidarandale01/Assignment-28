@@ -136,6 +136,89 @@
     <button onclick="resetGame()">Restart</button>
   </div>
 </div>
- 
+ <script>
+  let players = [];
+  let current = 0;
+  let board = Array(9).fill("");
+  let gameOver = false;
+
+  const winPatterns = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+
+  function startGame() {
+    const p1Name = p1NameInput.value || "Player 1";
+    const p2Name = p2NameInput.value || "Player 2";
+    const p1Sym = p1Symbol.value || "X";
+    const p2Sym = p2Symbol.value || "O";
+
+    if (p1Sym === p2Sym) {
+      alert("Symbols must be different!");
+      return;
+    }
+
+    players = [
+      { name: p1Name, symbol: p1Sym },
+      { name: p2Name, symbol: p2Sym }
+    ];
+
+    setup.style.display = "none";
+    game.style.display = "flex";
+    updateStatus();
+  }
+
+  function makeMove(index) {
+    if (board[index] || gameOver) return;
+
+    board[index] = players[current].symbol;
+    document.querySelectorAll(".cell")[index].textContent =
+      players[current].symbol;
+
+    if (checkWin()) {
+      status.textContent = `🏆 ${players[current].name} wins!`;
+      gameOver = true;
+      return;
+    }
+
+    if (!board.includes("")) {
+      status.textContent = "🤝 It's a draw!";
+      gameOver = true;
+      return;
+    }
+
+    current = 1 - current;
+    updateStatus();
+  }
+
+  function checkWin() {
+    return winPatterns.some(pattern =>
+      pattern.every(i => board[i] === players[current].symbol)
+    );
+  }
+
+  function updateStatus() {
+    status.textContent =
+      `${players[current].name}'s turn (${players[current].symbol})`;
+  }
+
+  function resetGame() {
+    board.fill("");
+    document.querySelectorAll(".cell").forEach(c => c.textContent = "");
+    gameOver = false;
+    current = 0;
+    updateStatus();
+  }
+
+  const p1NameInput = document.getElementById("p1Name");
+  const p2NameInput = document.getElementById("p2Name");
+  const p1Symbol = document.getElementById("p1Symbol");
+  const p2Symbol = document.getElementById("p2Symbol");
+  const setup = document.getElementById("setup");
+  const game = document.getElementById("game");
+  const status = document.getElementById("status");
+</script>
+
 </body>
 </html>
